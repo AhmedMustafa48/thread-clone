@@ -1,7 +1,12 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const Register = () => {
+  const [login, setLogin] = useState(false);
+
+  const toggleLogin = () => {
+    setLogin((prev) => !prev);
+  };
   return (
     <>
       <Stack
@@ -23,9 +28,11 @@ const Register = () => {
             fontWeight={"bold"}
             alignSelf={"center"}
           >
-            Register with email
+            {login ? "Login with email" : "Register with email"}
           </Typography>
-          <TextField variant="outlined" placeholder="Enter your username" />
+          {login ? null : (
+            <TextField variant="outlined" placeholder="Enter your username" />
+          )}
           <TextField variant="outlined" placeholder="Enter your email" />
           <TextField variant="outlined" placeholder="Enter your password" />
           <Button
@@ -42,7 +49,7 @@ const Register = () => {
               },
             }}
           >
-            SIGN UP
+            {login ? "LOGIN" : "SIGN UP"}
           </Button>
 
           <Typography
@@ -50,7 +57,10 @@ const Register = () => {
             fontSize={"1.3rem"}
             alignSelf={"center"}
           >
-            Already have an account? <span className="login-link">Login</span>
+            {login ? "Dont't have an account" : `Already have an account?{" "}`}
+            <span className="login-link" onClick={toggleLogin}>
+              {login ? "Sign up" : "Login"}
+            </span>
           </Typography>
         </Stack>
       </Stack>

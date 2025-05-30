@@ -30,6 +30,7 @@ const App = () => {
                 <Route exact path="reposts/:id" element={<Repost />} />
               </Route>
             </Route>
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </Box>
