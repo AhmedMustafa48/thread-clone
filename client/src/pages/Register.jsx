@@ -41,16 +41,25 @@ const Register = () => {
         flexDirection={"row"}
         justifyContent={"center"}
         alignItems={"center"}
-        sx={{
-          backgroundImage: 'url("/register-bg.webp")',
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 600px",
-        }}
+        sx={
+          _700
+            ? {
+                backgroundImage: 'url("/register-bg.webp")',
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "100% 600px",
+              }
+            : null
+        }
       >
-        <Stack flexDirection={"column"} width={"40%"} gap={2} mt={20}>
+        <Stack
+          flexDirection={"column"}
+          width={_700 ? "40%" : "90%"}
+          gap={2}
+          mt={_700 ? 20 : 0}
+        >
           <Typography
             variant="h5"
-            fontSize={"1.5rem"}
+            fontSize={_700 ? "1.5rem" : "1rem"}
             fontWeight={"bold"}
             alignSelf={"center"}
           >
@@ -93,7 +102,7 @@ const Register = () => {
 
           <Typography
             variant="subtitle2"
-            fontSize={"1.3rem"}
+            fontSize={_700 ? "1.3rem" : "1rem"}
             alignSelf={"center"}
           >
             {login ? "Dont't have an account " : `Already have an account? `}
