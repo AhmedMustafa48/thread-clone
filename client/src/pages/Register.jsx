@@ -1,11 +1,37 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState } from "react";
 
 const Register = () => {
+  const _700 = useMediaQuery("(min-width:700px)");
   const [login, setLogin] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const toggleLogin = () => {
     setLogin((prev) => !prev);
+  };
+  const handleLogin = () => {
+    const data = {
+      email,
+      password,
+    };
+    console.log(data);
+  };
+
+  const handleRegister = () => {
+    const data = {
+      username,
+      email,
+      password,
+    };
+    console.log(data);
   };
   return (
     <>
@@ -31,10 +57,22 @@ const Register = () => {
             {login ? "Login with email" : "Register with email"}
           </Typography>
           {login ? null : (
-            <TextField variant="outlined" placeholder="Enter your username" />
+            <TextField
+              variant="outlined"
+              placeholder="Enter your username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
           )}
-          <TextField variant="outlined" placeholder="Enter your email" />
-          <TextField variant="outlined" placeholder="Enter your password" />
+          <TextField
+            variant="outlined"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Button
             size="large"
             sx={{
@@ -48,6 +86,7 @@ const Register = () => {
                 cursor: "pointer",
               },
             }}
+            onClick={login ? handleLogin : handleRegister}
           >
             {login ? "LOGIN" : "SIGN UP"}
           </Button>
@@ -57,7 +96,7 @@ const Register = () => {
             fontSize={"1.3rem"}
             alignSelf={"center"}
           >
-            {login ? "Dont't have an account" : `Already have an account?{" "}`}
+            {login ? "Dont't have an account " : `Already have an account? `}
             <span className="login-link" onClick={toggleLogin}>
               {login ? "Sign up" : "Login"}
             </span>
