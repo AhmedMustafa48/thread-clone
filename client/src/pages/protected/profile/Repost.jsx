@@ -3,7 +3,7 @@ import React from "react";
 import Post from "../../../components/home/Post";
 
 const Repost = () => {
-  const _700 = useMediaQuery("(min-width=700px)");
+  const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>
       <Stack

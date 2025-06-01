@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, useMediaQuery } from "@mui/material";
 import Post from "../../../components/home/Post";
 const Threads = () => {
-  const _700 = useMediaQuery("(min-width=700px)");
+  const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>
       <Stack

@@ -3,7 +3,7 @@ import React from "react";
 import Comments from "../../../components/home/post/Comments";
 
 const Replies = () => {
-  const _700 = useMediaQuery("(min-width=700px)");
+  const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>
       <Stack

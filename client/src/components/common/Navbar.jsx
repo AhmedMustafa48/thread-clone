@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import { GoHomeFill } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
@@ -8,6 +8,7 @@ import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const _700 = useMediaQuery("(min-width:700px)");
   return (
     <>
       <Stack

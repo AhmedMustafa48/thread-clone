@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import { IoMenu } from "react-icons/io5";
 const Header = () => {
-  const _700 = useMediaQuery("(min-width=700px)");
+  const _700 = useMediaQuery("(min-width:700px)");
   return (
     <div>
       {_700 ? (
