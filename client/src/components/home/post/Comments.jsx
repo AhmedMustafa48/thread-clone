@@ -4,6 +4,8 @@ import { IoIosMore } from "react-icons/io";
 
 const Comments = () => {
   const _700 = useMediaQuery("(min-width:700px)");
+  const handleClose = () => {};
+  const handleDeleteComment = () => {};
 
   return (
     <>
@@ -38,6 +40,15 @@ const Comments = () => {
           <IoIosMore size={_700 ? 28 : 20} />
         </Stack>
       </Stack>
+      <Menu
+        anchorEl={""}
+        open={true}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <MenuItem onClick={handleDeleteComment}> Delete</MenuItem>
+      </Menu>
     </>
   );
 };
