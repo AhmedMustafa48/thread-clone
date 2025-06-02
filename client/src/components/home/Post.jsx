@@ -1,10 +1,13 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { IoIosMore } from "react-icons/io";
 import React from "react";
 import PostOne from "./post/PostOne";
 import PostTwo from "./post/PostTwo";
 
 const Post = () => {
+  const _700 = useMediaQuery("(min-width:700px)");
+  const _400 = useMediaQuery("(min-width:400px)");
+  const _300 = useMediaQuery("(min-width:300px)");
   return (
     <>
       <Stack

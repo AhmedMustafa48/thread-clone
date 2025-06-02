@@ -6,9 +6,10 @@ import { TbEdit } from "react-icons/tb";
 import { CiHeart } from "react-icons/ci";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const Navbar = () => {
-  const _700 = useMediaQuery("(min-width:700px)");
+  const _300 = useMediaQuery("(min-width:300px)");
   return (
     <>
       <Stack
@@ -17,20 +18,25 @@ const Navbar = () => {
         justifyContent={"space-around"}
         alignItems={"center"}
       >
-        <Link to="/">
-          <GoHomeFill size={32} />
+        <FaArrowLeft
+          size={_300 ? 32 : 24}
+          className="image-icon"
+          color="black"
+        />
+        <Link to="/" className="link" color="black">
+          <GoHomeFill size={_300 ? 32 : 24} />
         </Link>
-        <Link to="/search">
-          <IoIosSearch size={32} />
+        <Link to="/search" className="link" color="black">
+          <IoIosSearch size={_300 ? 32 : 24} />
         </Link>
-        <Link>
-          <TbEdit size={32} />
+        <Link className="link" color="black">
+          <TbEdit size={_300 ? 32 : 24} />
         </Link>
-        <Link>
-          <CiHeart size={32} />
+        <Link className="link" color="black">
+          <CiHeart size={_300 ? 32 : 24} />
         </Link>
-        <Link to={"/profile/threads/1"}>
-          <RxAvatar size={32} />
+        <Link to={"/profile/threads/1"} className="link" color="black">
+          <RxAvatar size={_300 ? 32 : 24} />
         </Link>
       </Stack>
     </>
