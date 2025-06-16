@@ -17,7 +17,7 @@ const ProtectedLayout = () => {
       overflow={"hidden"}
     >
       <Header />
-      {/* <AddPost /> */}
+      <AddPost />
       {/* <EditProfile /> */}
       {/* <MainMenu /> */}
       <Outlet />
