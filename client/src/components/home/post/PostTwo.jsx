@@ -3,7 +3,10 @@ import { Stack, Typography, useMediaQuery } from "@mui/material";
 import { FaRegHeart, FaRegComment, FaRetweet } from "react-icons/fa6";
 import { IoMdSend } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const PostTwo = () => {
+  const { darkMode } = useSelector((state) => state.service);
+
   const _300 = useMediaQuery("(min-width:300px)");
   const _400 = useMediaQuery("(min-width:400px)");
   const _500 = useMediaQuery("(min-width:500px)");
@@ -27,6 +30,7 @@ const PostTwo = () => {
                 fontSize={
                   _700 ? "1.2rem" : _400 ? "1rem" : _300 ? "0.9rem" : "0.8rem"
                 }
+                className={darkMode ? "mode" : ""}
               >
                 Hii guys , comment on this project.
               </Typography>
@@ -66,14 +70,14 @@ const PostTwo = () => {
           >
             <Typography
               variant="caption"
-              color={"GrayText"}
+              color={darkMode ? "white" : "GrayText"}
               fontSize={_700 ? "1.1rem" : "1rem"}
             >
               2 likes .
             </Typography>
             <Typography
               variant="caption"
-              color={"GrayText"}
+              color={darkMode ? "white" : "GrayText"}
               fontSize={_700 ? "1.1rem" : "1rem"}
             >
               2 comments

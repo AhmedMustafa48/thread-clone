@@ -3,11 +3,20 @@ import { IoIosMore } from "react-icons/io";
 import React from "react";
 import PostOne from "./post/PostOne";
 import PostTwo from "./post/PostTwo";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMyMenu } from "../../redux/slice";
 
 const Post = () => {
+  const { darkMode } = useSelector((state) => state.service);
+
   const _700 = useMediaQuery("(min-width:700px)");
   const _400 = useMediaQuery("(min-width:400px)");
   const _300 = useMediaQuery("(min-width:300px)");
+
+  const dispatch = useDispatch();
+  const handleOpenMenu = (e) => {
+    dispatch(toggleMyMenu(e.currentTarget));
+  };
   return (
     <>
       <Stack
@@ -37,14 +46,14 @@ const Post = () => {
         >
           <Typography
             variant="caption"
-            color={"GrayText"}
+            color={darkMode ? "white" : "GrayText"}
             fontSize={"1rem"}
             position={"relative"}
             top={2}
           >
             24 hrs
           </Typography>
-          <IoIosMore fontSize={_700 ? 28 : 20} />
+          <IoIosMore fontSize={_700 ? 28 : 20} onClick={handleOpenMenu} />
         </Stack>
       </Stack>
     </>
