@@ -5,34 +5,48 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLoginMutation, useSigninMutation } from "../redux/service";
 
 const Register = () => {
   const _700 = useMediaQuery("(min-width:700px)");
+  // first is function(signinUser) and second is response (signinUserData)
+  const [signinUser, signinUserData] = useSigninMutation();
+  const [loginUser, loginUserData] = useLoginMutation();
   const [login, setLogin] = useState(false);
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const toggleLogin = () => {
     setLogin((prev) => !prev);
   };
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const data = {
       email,
       password,
     };
-    console.log(data);
+    await loginUser(data);
+    // console.log(data);
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const data = {
-      username,
+      userName,
       email,
       password,
     };
-    console.log(data);
+    await signinUser(data);
   };
+
+  useEffect(() => {
+    if (signinUserData.isSuccess) {
+      console.log(signinUserData.data);
+    }
+    if (loginUserData.isSuccess) {
+      console.log(loginUserData.data);
+    }
+  }, [signinUserData.isSuccess, loginUserData.isSuccess]);
   return (
     <>
       <Stack
@@ -68,8 +82,8 @@ const Register = () => {
           {login ? null : (
             <TextField
               variant="outlined"
-              placeholder="Enter your username"
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your userName"
+              onChange={(e) => setUserName(e.target.value)}
             />
           )}
           <TextField

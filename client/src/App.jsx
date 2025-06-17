@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
 
-  const data = true;
+  const data = false;
   return (
     <>
       <Box minHeight={"100vh"} className={darkMode ? "mode" : ""}>
