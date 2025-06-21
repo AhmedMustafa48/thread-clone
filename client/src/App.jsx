@@ -19,7 +19,7 @@ import { useMyInfoQuery } from "./redux/service";
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
 
-  const { data, isSuccess, isError, isLoading } = useMyInfoQuery();
+  const { data, isSuccess, isError } = useMyInfoQuery();
 
   useEffect(() => {
     if (isSuccess || isError) {
@@ -29,19 +29,13 @@ const App = () => {
     }
   }, [data, isSuccess, isError]);
 
-  // Show loading while checking authentication
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  const isAuthenticated = isSuccess && data;
-
+  const myData = isSuccess;
   return (
     <>
       <Box minHeight={"100vh"} className={darkMode ? "mode" : ""}>
         <BrowserRouter>
           <Routes>
-            {isAuthenticated ? (
+            {myData ? (
               <Route exact path="/" element={<ProtectedLayout />}>
                 <Route exact path="" element={<Home />} />
                 <Route exact path="post/:id" element={<SinglePost />} />

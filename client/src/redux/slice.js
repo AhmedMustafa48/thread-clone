@@ -27,7 +27,7 @@ export const serviceSlice = createSlice({
       state.darkMode = !state.darkMode;
     },
     setMyInfo: (state, action) => {
-      state.myInfo = action.payload.me;
+      state.myInfo = action.payload;
     },
   },
 });
