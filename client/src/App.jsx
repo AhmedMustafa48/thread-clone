@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Loading from "./components/common/Loading";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/common/Header";
@@ -14,17 +14,34 @@ import Replies from "./pages/protected/profile/Replies";
 import Repost from "./pages/protected/profile/Repost";
 import SinglePost from "./pages/protected/profile/SinglePost";
 import { useSelector } from "react-redux";
+import { useMyInfoQuery } from "./redux/service";
 
 const App = () => {
   const { darkMode } = useSelector((state) => state.service);
 
-  const data = false;
+  const { data, isSuccess, isError, isLoading } = useMyInfoQuery();
+
+  useEffect(() => {
+    if (isSuccess || isError) {
+      console.log("Data is ", data);
+      console.log("success is ", isSuccess);
+      console.log("Error is ", isError);
+    }
+  }, [data, isSuccess, isError]);
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const isAuthenticated = isSuccess && data;
+
   return (
     <>
       <Box minHeight={"100vh"} className={darkMode ? "mode" : ""}>
         <BrowserRouter>
           <Routes>
-            {data ? (
+            {isAuthenticated ? (
               <Route exact path="/" element={<ProtectedLayout />}>
                 <Route exact path="" element={<Home />} />
                 <Route exact path="post/:id" element={<SinglePost />} />

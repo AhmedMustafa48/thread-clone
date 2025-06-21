@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setMyInfo } from "./slice";
 
 export const serviceApi = createApi({
   reducerPath: "serviceApi",
@@ -17,7 +18,16 @@ export const serviceApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidateTags: ["Me"],
+      invalidatesTags: ["Me"],
+      async onQueryStarted(params, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          // After successful signin, refetch user info
+          dispatch(serviceApi.util.invalidateTags(["Me"]));
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
     login: builder.mutation({
       query: (data) => ({
@@ -25,9 +35,34 @@ export const serviceApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["ME"],
+      invalidatesTags: ["Me"],
+      async onQueryStarted(params, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          // After successful login, refetch user info
+          dispatch(serviceApi.util.invalidateTags(["Me"]));
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
+    myInfo: builder.query({
+      query: () => ({
+        url: "me",
+        method: "GET",
+      }),
+      providesTags: ["Me"],
+      async onQueryStarted(params, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setMyInfo(data));
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
   }),
 });
 
-export const { useSigninMutation, useLoginMutation } = serviceApi;
+export const { useSigninMutation, useLoginMutation, useMyInfoQuery } =
+  serviceApi;

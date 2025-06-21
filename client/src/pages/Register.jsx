@@ -6,13 +6,18 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLoginMutation, useSigninMutation } from "../redux/service";
+import {
+  useLoginMutation,
+  useSigninMutation,
+  useMyInfoQuery,
+} from "../redux/service";
 
 const Register = () => {
   const _700 = useMediaQuery("(min-width:700px)");
   // first is function(signinUser) and second is response (signinUserData)
   const [signinUser, signinUserData] = useSigninMutation();
   const [loginUser, loginUserData] = useLoginMutation();
+  const { refetch } = useMyInfoQuery();
   const [login, setLogin] = useState(false);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,14 +25,24 @@ const Register = () => {
 
   const toggleLogin = () => {
     setLogin((prev) => !prev);
+    // Clear form when switching between login/signin
+    setUserName("");
+    setEmail("");
+    setPassword("");
   };
+
+  const clearForm = () => {
+    setUserName("");
+    setEmail("");
+    setPassword("");
+  };
+
   const handleLogin = async () => {
     const data = {
       email,
       password,
     };
     await loginUser(data);
-    // console.log(data);
   };
 
   const handleRegister = async () => {
@@ -42,11 +57,18 @@ const Register = () => {
   useEffect(() => {
     if (signinUserData.isSuccess) {
       console.log(signinUserData.data);
+      clearForm();
+      // Refetch user info after successful signin
+      refetch();
     }
     if (loginUserData.isSuccess) {
       console.log(loginUserData.data);
+      clearForm();
+      // Refetch user info after successful login
+      refetch();
     }
-  }, [signinUserData.isSuccess, loginUserData.isSuccess]);
+  }, [signinUserData.isSuccess, loginUserData.isSuccess, refetch]);
+
   return (
     <>
       <Stack
@@ -83,17 +105,21 @@ const Register = () => {
             <TextField
               variant="outlined"
               placeholder="Enter your userName"
+              value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
           )}
           <TextField
             variant="outlined"
             placeholder="Enter your email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
             placeholder="Enter your password"
+            type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
@@ -110,8 +136,13 @@ const Register = () => {
               },
             }}
             onClick={login ? handleLogin : handleRegister}
+            disabled={loginUserData.isLoading || signinUserData.isLoading}
           >
-            {login ? "LOGIN" : "SIGN UP"}
+            {loginUserData.isLoading || signinUserData.isLoading
+              ? "Loading..."
+              : login
+              ? "LOGIN"
+              : "SIGN UP"}
           </Button>
 
           <Typography

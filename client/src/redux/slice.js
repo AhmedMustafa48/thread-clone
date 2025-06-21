@@ -7,6 +7,7 @@ export const serviceSlice = createSlice({
     openEditProfileModal: false,
     anchorE1: null,
     anchorE2: null,
+    myInfo: null,
     darkMode: false,
   },
   reducers: {
@@ -22,8 +23,11 @@ export const serviceSlice = createSlice({
     toggleMyMenu: (state, action) => {
       state.anchorE2 = action.payload;
     },
-    toggleColorMode: (state, action) => {
+    toggleColorMode: (state) => {
       state.darkMode = !state.darkMode;
+    },
+    setMyInfo: (state, action) => {
+      state.myInfo = action.payload.me;
     },
   },
 });
@@ -34,6 +38,7 @@ export const {
   toggleMainMenu,
   toggleMyMenu,
   toggleColorMode,
+  setMyInfo,
 } = serviceSlice.actions;
 
 export default serviceSlice.reducer;
