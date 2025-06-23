@@ -26,7 +26,7 @@ export const serviceSlice = createSlice({
     toggleColorMode: (state) => {
       state.darkMode = !state.darkMode;
     },
-    setMyInfo: (state, action) => {
+    addMyInfo: (state, action) => {
       state.myInfo = action.payload;
     },
   },
@@ -38,7 +38,7 @@ export const {
   toggleMainMenu,
   toggleMyMenu,
   toggleColorMode,
-  setMyInfo,
+  addMyInfo,
 } = serviceSlice.actions;
 
 export default serviceSlice.reducer;

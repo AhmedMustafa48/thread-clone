@@ -30,6 +30,7 @@ const App = () => {
   }, [data, isSuccess, isError]);
 
   const myData = isSuccess;
+
   return (
     <>
       <Box minHeight={"100vh"} className={darkMode ? "mode" : ""}>
